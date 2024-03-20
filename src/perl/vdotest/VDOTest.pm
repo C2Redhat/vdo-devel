@@ -696,6 +696,7 @@ sub getUserMachine {
     my $cleanup = sub {
       my ($machine) = assertNumArgs(1, @_);
       $machine->runSystemCmd("sudo rm -f /lib64/$DMEVENT_LIB");
+      $machine->runSystemCmd("sudo /usr/sbin/logrotate /etc/logrotate.conf");
     };
     $self->{_machines}{$name}->addCleanupStep($cleanup);
   }
